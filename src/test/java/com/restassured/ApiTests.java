@@ -23,10 +23,11 @@ public class ApiTests {
     public void createUsers() {
         given()
                 .contentType("application/json")
-                .body("{\n"
-                        + "    \"name\": \"morpheus\",\n"
-                        + "    \"job\": \"leader\"\n"
-                        + "}")
+                .body("""
+                        {
+                            "name": "morpheus",
+                            "job": "leader"
+                        }""")
                 .when()
                 .post("/users")
                 .then()
@@ -47,10 +48,11 @@ public class ApiTests {
     public void updateAnExistingUser() {
         given()
                 .contentType("application/json")
-                .body("{\n"
-                        + "    \"name\": \"morpheus\",\n"
-                        + "    \"job\": \"zion resident\"\n"
-                        + "}")
+                .body("""
+                        {
+                            "name": "morpheus",
+                            "job": "zion resident"
+                        }""")
                 .when()
                 .put("/users/" + getRandomUserIDByKey())
                 .then()
