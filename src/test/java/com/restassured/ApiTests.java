@@ -76,6 +76,20 @@ public class ApiTests {
                 .statusCode(404);
     }
 
+    @Test
+    public void updateANonExistingUser() {
+        given()
+                .contentType("application/json")
+                .body("{\n"
+                        + "    \"name\": \"morpheus\",\n"
+                        + "    \"job\": \"zion resident\"\n"
+                        + "}")
+                .when()
+                .put("/users/" + getRandomUserIDByKey() + 404)
+                .then()
+                .statusCode(200);
+    }
+
 
     public String getRandomUserIDByKey() {
         Response response = given()
