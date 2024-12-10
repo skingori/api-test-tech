@@ -51,6 +51,7 @@
                         <include>**/*Tests</include>
                         <include>**/*Test</include>
                         <include>**/Test*</include>
+                        <include>**/*Test.java</include>
                     </includes>
                 </configuration>
             </plugin>
