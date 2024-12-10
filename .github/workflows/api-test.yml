@@ -22,7 +22,7 @@ jobs:
           distribution: 'temurin' # You can also use 'zulu', 'adopt', etc.
 
       - name: Cache Maven packages
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}

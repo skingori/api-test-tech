@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Random;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import io.restassured.response.Response;
 
+@Order(1)
 public class ApiTests {
 
     private static final String BASE_URL = "https://reqres.in/api";
