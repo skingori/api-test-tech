@@ -34,17 +34,3 @@ jobs:
 
       - name: Run Tests
         run: mvn test
-
-      - name: Archive test results
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-results
-          path: target/surefire-reports/
-
-      - name: Archive coverage results
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: coverage-results
-          path: target/site/jacoco/
