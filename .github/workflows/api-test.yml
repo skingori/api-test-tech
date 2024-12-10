@@ -18,8 +18,8 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
+          distribution: 'adopt'
           java-version: '17'
-          distribution: ''
 
       - name: Cache Maven packages
         uses: actions/cache@v2
