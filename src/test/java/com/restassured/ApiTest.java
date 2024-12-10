@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 import io.restassured.response.Response;
 
 @Order(1)
-public class ApiTests {
+public class ApiTest {
 
     private static final String BASE_URL = "https://reqres.in/api";
 
@@ -22,7 +22,7 @@ public class ApiTests {
     }
 
     @Test
-    public void createUsers() {
+    public void testCreateUsers() {
         given()
                 .contentType("application/json")
                 .body("""
@@ -37,7 +37,7 @@ public class ApiTests {
     }
 
     @Test
-    public void retrieveSingleUser() {
+    public void testRetrieveSingleUser() {
         given()
                 .when()
                 .get("/users/" + getRandomUserIDByKey())
@@ -47,7 +47,7 @@ public class ApiTests {
     }
 
     @Test()
-    public void updateAnExistingUser() {
+    public void testUpdateAnExistingUser() {
         given()
                 .contentType("application/json")
                 .body("""
@@ -62,7 +62,7 @@ public class ApiTests {
     }
 
     @Test
-    public void deleteAnExistingUser() {
+    public void testDeleteAnExistingUser() {
         given()
                 .when()
                 .delete("/users/" + getRandomUserIDByKey())
@@ -71,7 +71,7 @@ public class ApiTests {
     }
 
     @Test
-    public void retrieveANonExistingUser() {
+    public void testRetrieveANonExistingUser() {
 
         given()
                 .when()
@@ -81,7 +81,7 @@ public class ApiTests {
     }
 
     @Test
-    public void updateANonExistingUser() {
+    public void testUpdateANonExistingUser() {
         given()
                 .contentType("application/json")
                 .body("{\n"
