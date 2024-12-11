@@ -84,10 +84,11 @@ public class ApiTest {
     public void testUpdateANonExistingUser() {
         given()
                 .contentType("application/json")
-                .body("{\n"
-                        + "    \"name\": \"morpheus\",\n"
-                        + "    \"job\": \"zion resident\"\n"
-                        + "}")
+                .body("""
+                        {
+                            "name": "morpheus",
+                            "job": "zion resident"
+                        }""")
                 .when()
                 .put("/users/" + getRandomUserIDByKey() + 404)
                 .then()
