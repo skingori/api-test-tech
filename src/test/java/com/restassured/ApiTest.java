@@ -2,6 +2,7 @@ package com.restassured;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -54,13 +55,16 @@ public class ApiTest {
 
     @Test()
     public void testUpdateAnExistingUser() {
+        String name = "morpheus" + UUID.randomUUID();
+        String job = "zion resident" + UUID.randomUUID();
+
         given()
                 .contentType("application/json")
                 .body("""
                                 {
-                                    "name": "morpheus",
-                                    "job": "zion resident"
-                                }""")
+                                    "name": "%s",
+                                    "job": "%s"
+                                }""".formatted(name, job))
                 .when()
                 .put("/users/" + getRandomUserIDByKey())
                 .then()
