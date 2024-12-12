@@ -3,6 +3,7 @@ package com.restassured;
 import java.util.List;
 import java.util.Random;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -21,15 +22,20 @@ public class ApiTest {
         RestAssured.baseURI = BASE_URL;
     }
 
+    @AfterAll
+    static void tearDown() {
+        deleteAllUsers();
+    }
+
     @Test
     public void testCreateUsers() {
         given()
                 .contentType("application/json")
                 .body("""
-                        {
-                            "name": "morpheus",
-                            "job": "leader"
-                        }""")
+                                {
+                                    "name": "morpheus",
+                                    "job": "leader"
+                                }""")
                 .when()
                 .post("/users")
                 .then()
@@ -51,10 +57,10 @@ public class ApiTest {
         given()
                 .contentType("application/json")
                 .body("""
-                        {
-                            "name": "morpheus",
-                            "job": "zion resident"
-                        }""")
+                                {
+                                    "name": "morpheus",
+                                    "job": "zion resident"
+                                }""")
                 .when()
                 .put("/users/" + getRandomUserIDByKey())
                 .then()
@@ -85,18 +91,17 @@ public class ApiTest {
         given()
                 .contentType("application/json")
                 .body("""
-                        {
-                            "name": "morpheus",
-                            "job": "zion resident"
-                        }""")
+                                {
+                                    "name": "morpheus",
+                                    "job": "zion resident"
+                                }""")
                 .when()
                 .put("/users/" + getRandomUserIDByKey() + 404)
                 .then()
                 .statusCode(200);
     }
 
-
-    public String getRandomUserIDByKey() {
+    public static String getRandomUserIDByKey() {
         Response response = given()
                 .when()
                 .get("/users");
@@ -104,6 +109,19 @@ public class ApiTest {
         Random random = new Random();
         int randomIndex = random.nextInt(ids.size());
         return String.valueOf(ids.get(randomIndex));
+    }
+
+    public static void deleteAllUsers() {
+        Response response = given()
+                .when()
+                .get("/users");
+        List<Integer> ids = response.path("data.id");
+        for (Integer id : ids) {
+            System.out.println("Deleting user with id: " + id);
+            given()
+                    .when()
+                    .delete("/users/" + id);
+        }
     }
 
 }
